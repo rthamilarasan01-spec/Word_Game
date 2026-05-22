@@ -2,10 +2,11 @@ from flask import Flask,request,redirect,render_template,jsonify
 from flask_sqlalchemy import SQLAlchemy
 import random
 import json
+import os
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/word_game'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 db =SQLAlchemy(app)
 
