@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 db =SQLAlchemy(app)
 
-class Players(db.Model):
+class WordPlayers(db.Model):
     player_id = db.Column(db.String(50), primary_key=True)
     score = db.Column(db.Integer)
     average = db.Column(db.String(20))
@@ -84,7 +84,7 @@ def home():
 
 @app.route('/login/<player>')
 def login(player):
-    check_player = db.session.query(Players.player_id).all()
+    check_player = db.session.query(WordPlayers.player_id).all()
     player_list = [i[0] for i in check_player]
     if player in player_list:
         return render_template('main.html', player=player)
@@ -94,13 +94,13 @@ def login(player):
     
 @app.route('/new_login/<player>')
 def new_login(player):
-    check_player = db.session.query(Players.player_id).all()
+    check_player = db.session.query(WordPlayers.player_id).all()
     player_list = [i[0] for i in check_player]
     if player in player_list:
         player = 'Player id already exists try another'
         return render_template('login.html', new_player=player)
     else:
-        player_data = Players(
+        player_data = WordPlayers(
             player_id = player
         )
         db.session.add(player_data)
@@ -190,7 +190,7 @@ def score_card():
         average = '0%'
     else:
         average = str(round(score/count*20,2))+'%'
-    values = Players.query.get(player)
+    values = WordPlayers.query.get(player)
     if values.score:
         if score >= values.score:
             values.score = score
@@ -213,7 +213,7 @@ def score_card():
 
 @app.route('/leaderboard')
 def leader_board():
-    players = Players.query.order_by(Players.score.desc()).all()
+    players = WordPlayers.query.order_by(WordPlayers.score.desc()).all()
 
     rank = 1
 
