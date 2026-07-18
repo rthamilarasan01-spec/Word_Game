@@ -90,6 +90,26 @@
             transform:scale(1.05);
             opacity:0.9;
         }
+        #facebook-link{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding:15px;
+            margin:15px 0;
+            color:white;
+            text-decoration: none;
+            font-size:18px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+        #facebook-link>img{
+            width: 40px;
+        }
+        #facebook-link:hover{
+            transform:scale(1.05);
+            opacity:0.9;
+        }
 
     </style>
 </head>
@@ -107,6 +127,8 @@
         <button class="btn level-btn" onclick="chooseLevel()">CHOOSE LEVEL</button>
 
         <button class="btn exit-btn" onclick="backToHome()">EXIT</button>
+
+        <a href="https://www.facebook.com/share/14hr3AdPjD2/" id="facebook-link" target="_blank"><p>Follow</p><img src="/static/images/facebook.png" alt=""></a>
 
     </div>
 
